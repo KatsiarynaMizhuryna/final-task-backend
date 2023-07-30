@@ -15,6 +15,7 @@ export const getBoardsByIds = async (req: Request, res: Response) => {
   const ids = req.query.ids as string[];
   try {
     const allBoards = await boardService.findBoards();
+    // @ts-ignore
     res.json(allBoards.filter(item => ids.includes(item._id)));
   } catch (err) {
     console.log(err);

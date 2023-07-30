@@ -71,6 +71,7 @@ export const deleteTaskByParams = async (params: any, guid: string, initUser: st
   const tasks = await task.find(params);
   const deletedTasks = [];
   for (const onTask of tasks) {
+    // @ts-ignore
     deletedTasks.push(await deleteTaskById(onTask._id, guid, initUser, false));
   }
   socket.emit('tasks', {
@@ -90,6 +91,7 @@ export const clearUserInTasks = async (userId: string, guid: string, initUser: s
     const userIndex = onTask.users.findIndex((item: string) => item == userId)
     if (userIndex > 0) {
       onTask.users.splice(userIndex, 1);
+      // @ts-ignore
       clearedTasks.push(await updateTask(onTask._id, { users: onTask.users }, guid, initUser, false));
     }
   }

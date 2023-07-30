@@ -40,6 +40,7 @@ export const updateBoard = async (id: string, params: any, guid: string, initUse
   if (emit) {
     socket.emit('boards', {
       action: 'update',
+      // @ts-ignore
       users: await getUserIdsByBoardsIds([updatedBoard._id]),
       ids: [updatedBoard._id],
       guid,
@@ -82,6 +83,7 @@ export const deleteBoardByParams = async (params: any, guid: string, initUser: s
   const boards = await board.find(params);
   const deletedBoards = [];
   for (const onBoard of boards) {
+    // @ts-ignore
     deletedBoards.push(await deleteBoardById(onBoard._id, guid, initUser, false));
   }
   let users: string[] = [];
@@ -103,6 +105,7 @@ export const clearUserInBoards = async (userId: string, guid: string, initUser: 
     const userIndex = onBoard.users.findIndex((item: string) => item == userId)
     if (userIndex > 0) {
       onBoard.users.splice(userIndex, 1);
+      // @ts-ignore
       clearedBoards.push(await updateBoard(onBoard._id, { users: onBoard.users }, guid, initUser, false));
     }
   }
@@ -128,6 +131,7 @@ export const getUserIdsByBoardsIds = async (boards: string[]) => {
 
 export const getBordsIdsByUserId = async (user: string) => {
   const allboards = await board.find({});
+  // @ts-ignore
   const interestedBoards = allboards.filter(item => item._doc.users.includes(user) || item._doc.owner === user);
   return interestedBoards.map(board => board._id.toString());
 }

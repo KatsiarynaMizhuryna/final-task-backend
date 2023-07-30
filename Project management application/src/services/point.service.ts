@@ -83,6 +83,7 @@ export const deletePointsByParams = async (params: any, guid: string, initUser: 
   const points = await point.find(params);
   const deletedPoints = [];
   for (const onPoint of points) {
+    // @ts-ignore
     deletedPoints.push(await deletePointById(onPoint._id, guid, initUser, false));
   }
   socket.emit('points', {

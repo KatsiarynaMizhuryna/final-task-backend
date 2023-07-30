@@ -33,6 +33,7 @@ export const findFiles = async (req: Request, res: Response) => {
   const taskId = req.query.taskId as string;
   const allFiles = await fileService.findFiles({});
   if (ids) {
+    // @ts-ignore
     return res.json(allFiles.filter(item => ids.includes(item._id)));
   } else if (taskId) {
     return res.json(allFiles.filter(oneFile => oneFile.taskId == taskId));

@@ -55,6 +55,7 @@ export const deletedFilesByTask = async (taskId: string, guid: string, initUser:
   const files = await file.find({ taskId });
   const deletedFiles = [];
   for (const onFile of files) {
+    // @ts-ignore
     deletedFiles.push(await deleteFileById(onFile._id, guid, initUser, false));
   }
   socket.emit('files', {

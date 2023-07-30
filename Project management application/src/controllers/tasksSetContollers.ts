@@ -50,6 +50,7 @@ export const findTasks = async (req: Request, res: Response) => {
   const allTasks = await taskService.findTasks({});
   const ids = req.query.ids as string[];
   if (ids) {
+    // @ts-ignore
     return res.json(allTasks.filter(item => ids.includes(item._id)));
   } else if (search) {
     try {
@@ -62,6 +63,7 @@ export const findTasks = async (req: Request, res: Response) => {
         if (oneTask.description.toUpperCase().includes(searchRequest)) {
           return true;
         }
+        // @ts-ignore
         const users = [...allUsers.filter(user => user._id === new ObjectId(oneTask.userId) || oneTask.users.includes(user._id))];
         for (const user of users) {
 

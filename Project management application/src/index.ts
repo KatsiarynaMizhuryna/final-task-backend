@@ -8,7 +8,7 @@ import * as serverService from './services/server.service';
   try {
     await mongoose.connect('mongodb+srv://PMAAdmin:qrQR28dfAFaf28fg@pmacluster01.rcbt5ie.mongodb.net/managerApp');
     serverService.server.listen(process.env.PORT || PORT, function () {
-      console.log('Сервер ожидает подключения...');
+      console.log('Awaiting connection ...');
     })
   } catch (error) {
     console.log(error);

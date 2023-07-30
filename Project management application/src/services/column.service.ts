@@ -69,6 +69,7 @@ export const deleteColumnByParams = async (params: any, guid: string, initUser: 
   const columns = await column.find(params);
   const deletedColumns = [];
   for (const onColumn of columns) {
+    // @ts-ignore
     deletedColumns.push(await deleteColumnById(onColumn._id, guid, initUser, false));
   }
   socket.emit('columns', {

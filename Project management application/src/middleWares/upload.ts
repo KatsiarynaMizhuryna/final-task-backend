@@ -32,6 +32,7 @@ export const upload = multer({
       const guid = req.header('Guid') || 'undefined';
       const initUser = req.header('initUser') || 'undefined';
       const newFile = await fileService.createFile({ taskId, name, path, boardId }, guid, initUser);
+      // @ts-ignore
       req.params.fileId = newFile._id;
       next(null, true)
     } else {

@@ -21,6 +21,7 @@ export const findPoints = async (req: Request, res: Response) => {
   const ids = req.query.ids as string[];
   if (ids) {
     const allPoints = await pointService.findPoints({});
+    // @ts-ignore
     return res.json(allPoints.filter(item => ids.includes(item._id)));
   } else if (boards) {
     const allPoints = await pointService.findPoints({});

@@ -45,6 +45,7 @@ export const findColumns = async (req: Request, res: Response) => {
   const ids = req.query.ids as string[];
   if (ids) {
     const allColumns = await columnService.findColumns({});
+    // @ts-ignore
     return res.json(allColumns.filter(item => ids.includes(item._id)));
   } else if (boards) {
     const allColumns = await columnService.findColumns({});
